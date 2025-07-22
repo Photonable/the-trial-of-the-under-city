@@ -1,0 +1,177 @@
+[gd_scene load_steps=17 format=3 uid="uid://b2v3ob8hjjvcd"]
+
+[ext_resource type="Script" uid="uid://bqxfracognqub" path="res://addons/markdown_book/markdown_book.gd" id="1_7immt"]
+[ext_resource type="Script" uid="uid://dnkas1rovex6m" path="res://addons/markdown_book/markdown_tree.gd" id="2_pfst2"]
+[ext_resource type="Script" uid="uid://dbap0gqox0ty1" path="res://addons/markdownlabel/markdownlabel.gd" id="3_0ha0o"]
+[ext_resource type="Script" uid="uid://dcx7crs23nf4" path="res://addons/markdownlabel/header_formats/h1_format.gd" id="4_3ak75"]
+[ext_resource type="Script" uid="uid://d0sin64i4v3op" path="res://addons/markdownlabel/header_formats/h2_format.gd" id="5_4vubc"]
+[ext_resource type="Script" uid="uid://dlok0dv1tq2bf" path="res://addons/markdownlabel/header_formats/h3_format.gd" id="6_i2jfb"]
+[ext_resource type="Script" uid="uid://bayuh2vafablg" path="res://addons/markdownlabel/header_formats/h4_format.gd" id="7_jwa2b"]
+[ext_resource type="Script" uid="uid://dfr1w7u3jgni3" path="res://addons/markdownlabel/header_formats/h5_format.gd" id="8_d26e1"]
+[ext_resource type="Script" uid="uid://bsi6dexoofpe6" path="res://addons/markdownlabel/header_formats/h6_format.gd" id="9_cicmv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dl7tr"]
+content_margin_left = 5.0
+content_margin_top = 0.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+
+[sub_resource type="Resource" id="Resource_glb6x"]
+resource_local_to_scene = true
+script = ExtResource("4_3ak75")
+font_size = 2.285
+is_bold = false
+is_italic = false
+is_underlined = false
+override_font_color = false
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_1hc8u"]
+resource_local_to_scene = true
+script = ExtResource("5_4vubc")
+font_size = 1.714
+is_bold = false
+is_italic = false
+is_underlined = false
+override_font_color = false
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_ub2gb"]
+resource_local_to_scene = true
+script = ExtResource("6_i2jfb")
+font_size = 1.428
+is_bold = false
+is_italic = false
+is_underlined = false
+override_font_color = false
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_qi205"]
+resource_local_to_scene = true
+script = ExtResource("7_jwa2b")
+font_size = 1.142
+is_bold = false
+is_italic = false
+is_underlined = false
+override_font_color = false
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_0v8em"]
+resource_local_to_scene = true
+script = ExtResource("8_d26e1")
+font_size = 1.0
+is_bold = false
+is_italic = false
+is_underlined = false
+override_font_color = false
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_jsubp"]
+resource_local_to_scene = true
+script = ExtResource("9_cicmv")
+font_size = 0.857
+is_bold = false
+is_italic = false
+is_underlined = false
+override_font_color = false
+font_color = Color(1, 1, 1, 1)
+
+[node name="PanelContainer" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_dl7tr")
+
+[node name="MarkdownViewer" type="HBoxContainer" parent="." node_paths=PackedStringArray("tree")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 5
+script = ExtResource("1_7immt")
+tree = NodePath("Tree")
+
+[node name="Tree" type="Tree" parent="MarkdownViewer" node_paths=PackedStringArray("rich_text")]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+hide_root = true
+script = ExtResource("2_pfst2")
+rich_text = NodePath("../MarkdownLabel")
+
+[node name="MarkdownLabel" type="RichTextLabel" parent="MarkdownViewer"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=36]The Trial of the Under-City: A Post-Apocalyptic Gauntlet Show[/font_size]
+[b]Concept:[/b] In a grimy, post-apocalyptic world, the most popular form of entertainment is
+\"The Gauntlet,\" a live-streamed bloodsport where scavengers run a deadly, trap-filled ruin for the
+promise of life-saving supplies. The streamer is the contestant. The Twitch chat? They are the
+bloodthirsty audience and the show's producers, spending their \"caps\" (channel points) to influence
+the show.
+
+[b]Twitch Integration:[/b]
+
+[b]Sponsor's Choice:[/b] The audience acts as the show's sponsors. At the start of a run, they can
+vote to sponsor the streamer with a specific loadout—perhaps a rusty but powerful shotgun with
+little ammo, a versatile but weak crossbow, or just a medkit and a prayer.
+
+[b]Place Your Bets & Rig the Odds:[/b] Viewers can use channel points to \"bet\" on whether the streamer
+will survive the next room. They can then use more points to influence the outcome. \"Helping\" bets
+might reveal trap locations or spawn a health pack. \"Hindering\" bets could activate a hidden turret,
+release a pack of mutated hounds, or make a crucial platform crumble.
+
+[b]The Prize Vault:[/b] High-tier donations or sub-bombs contribute to the \"Prize Vault.\" If the
+streamer successfully completes the gauntlet, they gain access to this viewer-funded cache of
+high-tier loot for their next run. This creates a collective incentive for the audience to
+occasionally help their favorite contestant succeed.
+
+[b]Mutator Marketplace:[/b] Between runs, the chat can vote on \"Mutators\" for the next gauntlet. These
+are global effects like \"Pitch Black\" (where flashlights are the only light source), \"Feral Frenzy\"
+(enemies are faster and more aggressive), or \"Booby Trap Bonanza\" (the number of traps is doubled).
+
+[b]Why it's Great for Streaming:[/b] This concept leans into the performative nature of streaming
+itself. It creates a high-energy, action-oriented experience filled with thrilling highs and
+devastating, often comical, lows. The direct \"producer\" role gives the audience a tangible impact
+on the challenge, making every run a unique spectacle crafted by the community's whims."
+script = ExtResource("3_0ha0o")
+markdown_text = "# The Trial of the Under-City: A Post-Apocalyptic Gauntlet Show
+**Concept:** In a grimy, post-apocalyptic world, the most popular form of entertainment is
+\"The Gauntlet,\" a live-streamed bloodsport where scavengers run a deadly, trap-filled ruin for the
+promise of life-saving supplies. The streamer is the contestant. The Twitch chat? They are the
+bloodthirsty audience and the show's producers, spending their \"caps\" (channel points) to influence
+the show.
+
+**Twitch Integration:**
+
+**Sponsor's Choice:** The audience acts as the show's sponsors. At the start of a run, they can
+vote to sponsor the streamer with a specific loadout—perhaps a rusty but powerful shotgun with
+little ammo, a versatile but weak crossbow, or just a medkit and a prayer.
+
+**Place Your Bets & Rig the Odds:** Viewers can use channel points to \"bet\" on whether the streamer
+will survive the next room. They can then use more points to influence the outcome. \"Helping\" bets
+might reveal trap locations or spawn a health pack. \"Hindering\" bets could activate a hidden turret,
+release a pack of mutated hounds, or make a crucial platform crumble.
+
+**The Prize Vault:** High-tier donations or sub-bombs contribute to the \"Prize Vault.\" If the
+streamer successfully completes the gauntlet, they gain access to this viewer-funded cache of
+high-tier loot for their next run. This creates a collective incentive for the audience to
+occasionally help their favorite contestant succeed.
+
+**Mutator Marketplace:** Between runs, the chat can vote on \"Mutators\" for the next gauntlet. These
+are global effects like \"Pitch Black\" (where flashlights are the only light source), \"Feral Frenzy\"
+(enemies are faster and more aggressive), or \"Booby Trap Bonanza\" (the number of traps is doubled).
+
+**Why it's Great for Streaming:** This concept leans into the performative nature of streaming
+itself. It creates a high-energy, action-oriented experience filled with thrilling highs and
+devastating, often comical, lows. The direct \"producer\" role gives the audience a tangible impact
+on the challenge, making every run a unique spectacle crafted by the community's whims."
+h1 = SubResource("Resource_glb6x")
+h2 = SubResource("Resource_1hc8u")
+h3 = SubResource("Resource_ub2gb")
+h4 = SubResource("Resource_qi205")
+h5 = SubResource("Resource_0v8em")
+h6 = SubResource("Resource_jsubp")
