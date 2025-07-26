@@ -108,69 +108,290 @@ size_flags_horizontal = 3
 theme_override_font_sizes/normal_font_size = 14
 theme_override_font_sizes/bold_font_size = 18
 bbcode_enabled = true
-text = "[font_size=31]The Trial of the Under-City: A Post-Apocalyptic Gauntlet Show[/font_size]
-[color=purple][b]Concept:[/b][/color] In a grimy, post-apocalyptic world, the most popular form of entertainment is
-\"The Gauntlet,\" a live-streamed bloodsport where scavengers run a deadly, trap-filled ruin for the
-promise of life-saving supplies. The streamer is the contestant. The Twitch chat? They are the
-bloodthirsty audience and the show's producers, spending their \"caps\" (channel points) to influence
-the show.
+text = "Game Design Document: The Trial of the Under-City
+[ol]Overview
+[/ol]
+Game Title: The Trial of the Under-City
 
-[font_size=23]Twitch Integration:[/font_size]
+Concept: A fast-paced, third-person action-platformer where a single player (the \"Runner\") navigates a deadly, procedurally generated 3D ruin (the \"Gauntlet\"). The game is designed to be live-streamed, with the viewing audience directly influencing the gameplay in real-time through a channel-point-based system, including an interactive, top-down map view that allows them to design upcoming challenges.
 
-[color=purple][b]Sponsor's Choice:[/b][/color] The audience acts as the show's sponsors. At the start of a run, they can
-vote to sponsor the streamer with a specific loadout—perhaps a rusty but powerful shotgun with
-little ammo, a versatile but weak crossbow, or just a medkit and a prayer.
+Genre: Third-Person Action, Roguelite, \"Streamer vs. Chat\"
 
-[color=purple][b]Place Your Bets & Rig the Odds:[/b][/color] Viewers can use channel points to \"bet\" on whether the streamer
-will survive the next room. They can then use more points to influence the outcome. \"Helping\" bets
-might reveal trap locations or spawn a health pack. \"Hindering\" bets could activate a hidden turret,
-release a pack of mutated hounds, or make a crucial platform crumble.
+Target Audience: Twitch/YouTube streamers and their communities, fans of roguelites, action games, and interactive entertainment.
 
-[color=purple][b]The Prize Vault:[/b][/color] High-tier donations or sub-bombs contribute to the \"Prize Vault.\" If the
-streamer successfully completes the gauntlet, they gain access to this viewer-funded cache of
-high-tier loot for their next run. This creates a collective incentive for the audience to
-occasionally help their favorite contestant succeed.
+Core Loop:
 
-[color=purple][b]]Mutator Marketplace:[/b][/color] Between runs, the chat can vote on \"Mutators\" for the next gauntlet. These
-are global effects like \"Pitch Black\" (where flashlights are the only light source), \"Feral Frenzy\"
-(enemies are faster and more aggressive), or \"Booby Trap Bonanza\" (the number of traps is doubled).
+Lobby: Streamer and Chat (or AI Showrunner) prepare for the run. They vote on Loadout and Mutators.
 
-[color=purple][b]Why it's Great for Streaming:[/b][/color] This concept leans into the performative nature of streaming
-itself. It creates a high-energy, action-oriented experience filled with thrilling highs and
-devastating, often comical, lows. The direct \"producer\" role gives the audience a tangible impact
-on the challenge, making every run a unique spectacle crafted by the community's whims."
+Run: Streamer attempts to clear a series of procedurally generated 3D rooms.
+
+Interact & Design:
+
+In the current room, Chat/AI spends \"caps\" to help or hinder the streamer in real-time.
+
+Using the Producer's View map, Chat/AI votes on the theme and contents of the next undiscovered room.
+
+Conclude: The run ends in success (reaching the end) or failure (death).
+
+Reward/Reset: If successful, the streamer accesses the Prize Vault. Win or lose, the Gauntlet resets for the next unique run.
+
+2. Gameplay Mechanics
+2.1. The Runner
+The player character is agile and responsive, with a core moveset designed for fluid traversal and combat in a 3D environment. The camera is a dynamic over-the-shoulder view.
+
+Controls:
+
+Movement: WASD for forward, backward, and strafing movement.
+
+Camera: Mouse control for looking and aiming.
+
+Jump / Mantle: Ability to jump and automatically mantle ledges.
+
+Dash/Dodge Roll: A quick burst of speed to evade attacks or cross gaps.
+
+Primary Attack: Fired from an over-the-shoulder aiming perspective.
+
+Secondary Action: (e.g., aim down sights, use item).
+
+Interact: Pick up items, open doors.
+
+Health: A simple health bar. Reaching zero ends the run. Health is scarce and primarily comes from medkits or audience intervention.
+
+2.2. The Gauntlet
+The Gauntlet is a series of interconnected 3D rooms. The layout of rooms, enemy placements, and trap locations are procedurally generated for each run, heavily influenced by audience or AI votes.
+
+Room Types:
+
+Trap Rooms: Focused on environmental hazards in 3D space.
+
+Combat Rooms: Arenas with cover, verticality, and multiple entry points for enemies.
+
+Platforming Rooms: Requires precise navigation of complex 3D structures.
+
+Safe Rooms: A brief respite. The first room is always a Safe Room.
+
+Enemies:
+
+Mutated Hounds: Fast, melee attackers.
+
+Scrap-Bots: Ranged attackers that use cover.
+
+Stalkers: Stealthy ambush predators.
+
+Automated Turrets: Stationary area-denial threats.
+
+3. Twitch/Audience Integration
+This is the core of the experience. The currency for all interactions is \"Caps.\"
+
+3.1. Pre-Run Phase
+Sponsor's Choice (Loadout Vote): Chat votes on one of three starting loadouts for the streamer.
+
+Mutator Marketplace (Vote): Chat votes on a global modifier for the entire run.
+
+3.2. Live-Run Interaction (Direct)
+These events can be triggered via chat commands or through the Producer's View map in the currently occupied room.
+
+Help Events: Reveal Traps, Spawn Health Pack, Ammo Drop, Friendly Ghost.
+
+Hinder Events: Activate Trap, Release the Hounds, Platform Crumble, Jam Weapon, Brief Blackout.
+
+3.3. The Producer's View (Interactive Map)
+This is a browser-based, top-down tactical map of the Gauntlet, accessible to all viewers via a link periodically shared in chat.
+
+Interface: The map displays a 2D layout of the Gauntlet. Discovered rooms show real-time positions of the streamer, enemies, and key objects. Undiscovered rooms are shown as empty templates.
+
+Foreshadowing (Undiscovered Rooms): The audience can vote on the contents of the next room.
+
+Directing (Discovered Rooms): The map provides a tactical interface for triggering events in the streamer's current room.
+
+The Director's Cut (Bypass Voting): Any voting process can be instantly bypassed by a single viewer willing to pay a premium Cap price.
+
+3.4. The Prize Vault
+Funding: High-value interactions (Subs, Donations) contribute high-tier items to the Prize Vault.
+
+Access: The streamer gains access if they successfully complete the Gauntlet.
+
+Usage: The streamer can select ONE item from the Vault to use on their next run.
+
+4. Art & Sound
+Visual Style: Grimy, industrial, oppressive. The third-person camera keeps the Runner as the focal point. The Producer's View uses a clean, tactical blueprint-style aesthetic.
+
+Sound Design: Crunchy, impactful, and directional audio is crucial for gameplay.
+
+Music: A dynamic, synth-heavy soundtrack that reacts to the action.
+
+5. Monetization & Retention
+Primary Platform: PC (Steam).
+
+Monetization: Premium, one-time purchase.
+
+Retention: Procedural generation combined with audience-driven level design ensures no two runs are ever the same.
+
+6. Single-Player & AI Showrunner
+To ensure a robust and engaging experience without a live audience, the game features a sophisticated AI Showrunner system. This system can either supplement a small audience or take over completely, simulating the chaos and creativity of a real chat.
+
+6.1. Activation Modes
+Live Mode: The default mode. All interactions are driven by the connected Twitch chat.
+
+Hybrid Mode: If audience interaction drops below a certain threshold for a period of time, the AI Showrunner activates, seamlessly filling in the gaps to keep the action going. Its votes and actions are weighted alongside any real viewers.
+
+AI Mode: A pure single-player experience. The player selects an \"AI Production Team\" that will control the Gauntlet from start to finish.
+
+6.2. The AI Production Team
+In AI Mode, the player doesn't just choose one AI; they choose a \"team\" of 2-3 AI personalities who will work simultaneously, often with conflicting goals. Each AI gets its own \"Cap\" budget and will spend it according to its personality, creating a dynamic and unpredictable show.
+
+6.3. AI Personalities / Roles
+The Producer (The Storyteller): This AI focuses on the big picture. It tries to create a dramatic narrative arc. It might help the player through early rooms to build up resources, only to design a brutal, multi-stage finale. It's responsible for most of the \"Room Theme\" votes.
+
+The Gremlin (The Chaos Engine): This AI lives for moment-to-moment mayhem. It has a smaller Cap budget but spends it frequently on low-cost Hinder events like activating a single trap, jamming a weapon at a bad time, or causing a brief blackout. It rarely helps.
+
+The Sponsor (The Merciful Sadist): This AI is responsible for all \"Help\" events. However, its help often comes with a twist. It might spawn a health pack on a dangerously high platform or offer an ammo drop right next to an enemy spawn point. It creates risk/reward scenarios.
+
+The Architect (The Sadist): This AI's sole focus is on level design. In the Producer's View, it will always vote for the most difficult room themes (\"Deathtrap,\" \"Infestation\") and use its budget to add extra traps and elite enemies to the upcoming rooms.
+
+The player can mix and match these AIs to create their desired experience. A team of The Producer and The Sponsor would lead to a dramatic, tense run. A team of The Gremlin and The Architect would be pure, unrelenting punishment."
 script = ExtResource("3_nfd08")
-markdown_text = "# The Trial of the Under-City: A Post-Apocalyptic Gauntlet Show
-[color=purple]**Concept:**[/color] In a grimy, post-apocalyptic world, the most popular form of entertainment is
-\"The Gauntlet,\" a live-streamed bloodsport where scavengers run a deadly, trap-filled ruin for the
-promise of life-saving supplies. The streamer is the contestant. The Twitch chat? They are the
-bloodthirsty audience and the show's producers, spending their \"caps\" (channel points) to influence
-the show.
+markdown_text = "Game Design Document: The Trial of the Under-City
+1. Overview
+Game Title: The Trial of the Under-City
 
-## Twitch Integration:
+Concept: A fast-paced, third-person action-platformer where a single player (the \"Runner\") navigates a deadly, procedurally generated 3D ruin (the \"Gauntlet\"). The game is designed to be live-streamed, with the viewing audience directly influencing the gameplay in real-time through a channel-point-based system, including an interactive, top-down map view that allows them to design upcoming challenges.
 
-[color=purple]**Sponsor's Choice:**[/color] The audience acts as the show's sponsors. At the start of a run, they can
-vote to sponsor the streamer with a specific loadout—perhaps a rusty but powerful shotgun with
-little ammo, a versatile but weak crossbow, or just a medkit and a prayer.
+Genre: Third-Person Action, Roguelite, \"Streamer vs. Chat\"
 
-[color=purple]**Place Your Bets & Rig the Odds:**[/color] Viewers can use channel points to \"bet\" on whether the streamer
-will survive the next room. They can then use more points to influence the outcome. \"Helping\" bets
-might reveal trap locations or spawn a health pack. \"Hindering\" bets could activate a hidden turret,
-release a pack of mutated hounds, or make a crucial platform crumble.
+Target Audience: Twitch/YouTube streamers and their communities, fans of roguelites, action games, and interactive entertainment.
 
-[color=purple]**The Prize Vault:**[/color] High-tier donations or sub-bombs contribute to the \"Prize Vault.\" If the
-streamer successfully completes the gauntlet, they gain access to this viewer-funded cache of
-high-tier loot for their next run. This creates a collective incentive for the audience to
-occasionally help their favorite contestant succeed.
+Core Loop:
 
-[color=purple]**]Mutator Marketplace:**[/color] Between runs, the chat can vote on \"Mutators\" for the next gauntlet. These
-are global effects like \"Pitch Black\" (where flashlights are the only light source), \"Feral Frenzy\"
-(enemies are faster and more aggressive), or \"Booby Trap Bonanza\" (the number of traps is doubled).
+Lobby: Streamer and Chat (or AI Showrunner) prepare for the run. They vote on Loadout and Mutators.
 
-[color=purple]**Why it's Great for Streaming:**[/color] This concept leans into the performative nature of streaming
-itself. It creates a high-energy, action-oriented experience filled with thrilling highs and
-devastating, often comical, lows. The direct \"producer\" role gives the audience a tangible impact
-on the challenge, making every run a unique spectacle crafted by the community's whims."
+Run: Streamer attempts to clear a series of procedurally generated 3D rooms.
+
+Interact & Design:
+
+In the current room, Chat/AI spends \"caps\" to help or hinder the streamer in real-time.
+
+Using the Producer's View map, Chat/AI votes on the theme and contents of the next undiscovered room.
+
+Conclude: The run ends in success (reaching the end) or failure (death).
+
+Reward/Reset: If successful, the streamer accesses the Prize Vault. Win or lose, the Gauntlet resets for the next unique run.
+
+2. Gameplay Mechanics
+2.1. The Runner
+The player character is agile and responsive, with a core moveset designed for fluid traversal and combat in a 3D environment. The camera is a dynamic over-the-shoulder view.
+
+Controls:
+
+Movement: WASD for forward, backward, and strafing movement.
+
+Camera: Mouse control for looking and aiming.
+
+Jump / Mantle: Ability to jump and automatically mantle ledges.
+
+Dash/Dodge Roll: A quick burst of speed to evade attacks or cross gaps.
+
+Primary Attack: Fired from an over-the-shoulder aiming perspective.
+
+Secondary Action: (e.g., aim down sights, use item).
+
+Interact: Pick up items, open doors.
+
+Health: A simple health bar. Reaching zero ends the run. Health is scarce and primarily comes from medkits or audience intervention.
+
+2.2. The Gauntlet
+The Gauntlet is a series of interconnected 3D rooms. The layout of rooms, enemy placements, and trap locations are procedurally generated for each run, heavily influenced by audience or AI votes.
+
+Room Types:
+
+Trap Rooms: Focused on environmental hazards in 3D space.
+
+Combat Rooms: Arenas with cover, verticality, and multiple entry points for enemies.
+
+Platforming Rooms: Requires precise navigation of complex 3D structures.
+
+Safe Rooms: A brief respite. The first room is always a Safe Room.
+
+Enemies:
+
+Mutated Hounds: Fast, melee attackers.
+
+Scrap-Bots: Ranged attackers that use cover.
+
+Stalkers: Stealthy ambush predators.
+
+Automated Turrets: Stationary area-denial threats.
+
+3. Twitch/Audience Integration
+This is the core of the experience. The currency for all interactions is \"Caps.\"
+
+3.1. Pre-Run Phase
+Sponsor's Choice (Loadout Vote): Chat votes on one of three starting loadouts for the streamer.
+
+Mutator Marketplace (Vote): Chat votes on a global modifier for the entire run.
+
+3.2. Live-Run Interaction (Direct)
+These events can be triggered via chat commands or through the Producer's View map in the currently occupied room.
+
+Help Events: Reveal Traps, Spawn Health Pack, Ammo Drop, Friendly Ghost.
+
+Hinder Events: Activate Trap, Release the Hounds, Platform Crumble, Jam Weapon, Brief Blackout.
+
+3.3. The Producer's View (Interactive Map)
+This is a browser-based, top-down tactical map of the Gauntlet, accessible to all viewers via a link periodically shared in chat.
+
+Interface: The map displays a 2D layout of the Gauntlet. Discovered rooms show real-time positions of the streamer, enemies, and key objects. Undiscovered rooms are shown as empty templates.
+
+Foreshadowing (Undiscovered Rooms): The audience can vote on the contents of the next room.
+
+Directing (Discovered Rooms): The map provides a tactical interface for triggering events in the streamer's current room.
+
+The Director's Cut (Bypass Voting): Any voting process can be instantly bypassed by a single viewer willing to pay a premium Cap price.
+
+3.4. The Prize Vault
+Funding: High-value interactions (Subs, Donations) contribute high-tier items to the Prize Vault.
+
+Access: The streamer gains access if they successfully complete the Gauntlet.
+
+Usage: The streamer can select ONE item from the Vault to use on their next run.
+
+4. Art & Sound
+Visual Style: Grimy, industrial, oppressive. The third-person camera keeps the Runner as the focal point. The Producer's View uses a clean, tactical blueprint-style aesthetic.
+
+Sound Design: Crunchy, impactful, and directional audio is crucial for gameplay.
+
+Music: A dynamic, synth-heavy soundtrack that reacts to the action.
+
+5. Monetization & Retention
+Primary Platform: PC (Steam).
+
+Monetization: Premium, one-time purchase.
+
+Retention: Procedural generation combined with audience-driven level design ensures no two runs are ever the same.
+
+6. Single-Player & AI Showrunner
+To ensure a robust and engaging experience without a live audience, the game features a sophisticated AI Showrunner system. This system can either supplement a small audience or take over completely, simulating the chaos and creativity of a real chat.
+
+6.1. Activation Modes
+Live Mode: The default mode. All interactions are driven by the connected Twitch chat.
+
+Hybrid Mode: If audience interaction drops below a certain threshold for a period of time, the AI Showrunner activates, seamlessly filling in the gaps to keep the action going. Its votes and actions are weighted alongside any real viewers.
+
+AI Mode: A pure single-player experience. The player selects an \"AI Production Team\" that will control the Gauntlet from start to finish.
+
+6.2. The AI Production Team
+In AI Mode, the player doesn't just choose one AI; they choose a \"team\" of 2-3 AI personalities who will work simultaneously, often with conflicting goals. Each AI gets its own \"Cap\" budget and will spend it according to its personality, creating a dynamic and unpredictable show.
+
+6.3. AI Personalities / Roles
+The Producer (The Storyteller): This AI focuses on the big picture. It tries to create a dramatic narrative arc. It might help the player through early rooms to build up resources, only to design a brutal, multi-stage finale. It's responsible for most of the \"Room Theme\" votes.
+
+The Gremlin (The Chaos Engine): This AI lives for moment-to-moment mayhem. It has a smaller Cap budget but spends it frequently on low-cost Hinder events like activating a single trap, jamming a weapon at a bad time, or causing a brief blackout. It rarely helps.
+
+The Sponsor (The Merciful Sadist): This AI is responsible for all \"Help\" events. However, its help often comes with a twist. It might spawn a health pack on a dangerously high platform or offer an ammo drop right next to an enemy spawn point. It creates risk/reward scenarios.
+
+The Architect (The Sadist): This AI's sole focus is on level design. In the Producer's View, it will always vote for the most difficult room themes (\"Deathtrap,\" \"Infestation\") and use its budget to add extra traps and elite enemies to the upcoming rooms.
+
+The player can mix and match these AIs to create their desired experience. A team of The Producer and The Sponsor would lead to a dramatic, tense run. A team of The Gremlin and The Architect would be pure, unrelenting punishment."
 h1 = SubResource("Resource_glb6x")
 h2 = SubResource("Resource_1hc8u")
 h3 = SubResource("Resource_ub2gb")

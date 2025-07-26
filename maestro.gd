@@ -1,12 +1,17 @@
 extends Node
 
 var game_controller : GameController
+var showrunner_ai : ShowRunner
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+signal game_started
+signal quit_game
+signal splash_finished
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func emit_game_started():
+	game_started.emit()
+	
+func emit_quit_game():
+	quit_game.emit()
+	
+func emit_splash_finished():
+	splash_finished.emit()
