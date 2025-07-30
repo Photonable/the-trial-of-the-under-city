@@ -1,11 +1,49 @@
-[gd_scene load_steps=2 format=3 uid="uid://daf274wpnfsxu"]
+[gd_scene load_steps=8 format=3 uid="uid://daf274wpnfsxu"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_mc277"]
+[ext_resource type="Texture2D" uid="uid://dbh65jvm2x82h" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="1_3mpcf"]
+[ext_resource type="Script" uid="uid://w3usoaklv4cx" path="res://Scripts/visual/test.torch" id="1_yadso"]
+[ext_resource type="Script" uid="uid://btyw48vp8vqgu" path="res://Scripts/player.gd" id="2_l8pkm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l8pkm"]
+albedo_texture = ExtResource("1_3mpcf")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yadso"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ax2u0"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_l8pkm"]
 
 [node name="Test" type="Node3D"]
+script = ExtResource("1_yadso")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.941088, 0.338163, 0, -0.338163, 0.941088, 0, 0.798528, 1.86625)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.92521, -0.350825, 0.1446, 0, 0.38107, 0.924546, -0.379456, 0.855399, -0.35257, 0, 0, 0)
+light_energy = 2.0
+shadow_enabled = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_mc277")
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+material_override = SubResource("StandardMaterial3D_l8pkm")
+use_collision = true
+size = Vector3(100, 1, 100)
+
+[node name="PlayerRoot" type="Node3D" parent="."]
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="PlayerRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+script = ExtResource("2_l8pkm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerRoot/CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_yadso")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerRoot/CharacterBody3D"]
+mesh = SubResource("CapsuleMesh_ax2u0")
+
+[node name="Head" type="Node3D" parent="PlayerRoot/CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.863987, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="PlayerRoot/CharacterBody3D/Head"]
+shape = SubResource("SphereShape3D_l8pkm")
+spring_length = 10.0
+
+[node name="Camera3D" type="Camera3D" parent="PlayerRoot/CharacterBody3D/Head/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)

@@ -19,9 +19,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func _unhandled_key_input(event: InputEvent) -> void:
-	if Input.is_action_pressed("Pause"):
-		get_tree().quit()
+#func _unhandled_key_input(event: InputEvent) -> void:
+	#if Input.is_action_pressed("Pause"):
+		#get_tree().quit()
 
 # Change the gui scene.
 func change_gui_scene(new_scene: String, delete: bool = true, keep_running: bool = false) -> void:
