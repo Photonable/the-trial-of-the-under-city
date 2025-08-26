@@ -1,49 +1,130 @@
-[gd_scene load_steps=8 format=3 uid="uid://daf274wpnfsxu"]
+[gd_scene load_steps=14 format=3 uid="uid://daf274wpnfsxu"]
 
-[ext_resource type="Texture2D" uid="uid://dbh65jvm2x82h" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="1_3mpcf"]
-[ext_resource type="Script" uid="uid://w3usoaklv4cx" path="res://scripts/visual/test.torch" id="1_yadso"]
-[ext_resource type="Script" uid="uid://btyw48vp8vqgu" path="res://scripts/player.gd" id="2_l8pkm"]
+[ext_resource type="PackedScene" uid="uid://ddqia1dnm4t71" path="res://scenes/player.tscn" id="1_drs0p"]
+[ext_resource type="Script" uid="uid://dyp17uwe0xtmd" path="res://scripts/grid_test.gd" id="1_non4e"]
+[ext_resource type="Texture2D" uid="uid://btnp8lesx8hv1" path="res://addons/kenney_prototype_textures/dark/texture_04.png" id="2_drs0p"]
+[ext_resource type="Texture2D" uid="uid://5p3sd3g3cf7m" path="res://addons/kenney_prototype_textures/green/texture_08.png" id="3_f8l3j"]
+[ext_resource type="Texture2D" uid="uid://dhab0i1dsuk1k" path="res://addons/kenney_prototype_textures/light/texture_05.png" id="4_4nb47"]
+[ext_resource type="PackedScene" uid="uid://d2rinfpwo2pp1" path="res://synty/prototype/SM_Prop_Barrier_01.glb" id="4_bj6kq"]
+[ext_resource type="PackedScene" uid="uid://b2vc75fwe33sa" path="res://scenes/3DScenes/SectionCollider.tscn" id="6_0mnth"]
+[ext_resource type="MeshLibrary" uid="uid://bbdrc11obsxcp" path="res://meshlibraries/test.tres" id="7_0mnth"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l8pkm"]
-albedo_texture = ExtResource("1_3mpcf")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f8l3j"]
+albedo_texture = ExtResource("2_drs0p")
+uv1_scale = Vector3(100, 100, 100)
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yadso"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bj6kq"]
+albedo_texture = ExtResource("3_f8l3j")
+uv1_triplanar = true
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ax2u0"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4nb47"]
+albedo_texture = ExtResource("3_f8l3j")
+uv1_triplanar = true
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_l8pkm"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sanvd"]
+albedo_texture = ExtResource("3_f8l3j")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_non4e"]
+albedo_texture = ExtResource("4_4nb47")
+uv1_triplanar = true
 
 [node name="Test" type="Node3D"]
-script = ExtResource("1_yadso")
+script = ExtResource("1_non4e")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.92521, -0.350825, 0.1446, 0, 0.38107, 0.924546, -0.379456, 0.855399, -0.35257, 0, 0, 0)
 light_energy = 2.0
 shadow_enabled = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-material_override = SubResource("StandardMaterial3D_l8pkm")
+[node name="PlayerRoot" parent="." instance=ExtResource("1_drs0p")]
+
+[node name="Arena" type="Node3D" parent="."]
+
+[node name="Ground" type="CSGBox3D" parent="Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 227, 0, -228)
 use_collision = true
-size = Vector3(100, 1, 100)
+size = Vector3(500, 1, 500)
+material = SubResource("StandardMaterial3D_f8l3j")
 
-[node name="PlayerRoot" type="Node3D" parent="."]
+[node name="Ramps" type="Node3D" parent="Arena"]
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="PlayerRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-script = ExtResource("2_l8pkm")
+[node name="Ramp(15 deg)" type="CSGBox3D" parent="Arena/Ramps"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, -0.5, 0.545997, -10.4115)
+use_collision = true
+size = Vector3(2, 1, 4)
+material = SubResource("StandardMaterial3D_bj6kq")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerRoot/CharacterBody3D"]
-shape = SubResource("CapsuleShape3D_yadso")
+[node name="Ramp(30 deg)" type="CSGBox3D" parent="Arena/Ramps"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 1.5, 1.088, -10.3323)
+use_collision = true
+size = Vector3(2, 1, 4)
+material = SubResource("StandardMaterial3D_4nb47")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerRoot/CharacterBody3D"]
-mesh = SubResource("CapsuleMesh_ax2u0")
+[node name="Ramp(45 deg)" type="CSGBox3D" parent="Arena/Ramps"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 3.5, 1.56721, -10.1254)
+use_collision = true
+size = Vector3(2, 1, 4)
+material = SubResource("StandardMaterial3D_sanvd")
 
-[node name="Head" type="Node3D" parent="PlayerRoot/CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.863987, 0)
+[node name="Ramp(60 deg)" type="CSGBox3D" parent="Arena/Ramps"]
+transform = Transform3D(1, 0, 0, 0, 0.5, -0.866025, 0, 0.866025, 0.5, 5.5, 1.99449, -9.80299)
+use_collision = true
+size = Vector3(2, 1, 4)
+material = SubResource("StandardMaterial3D_sanvd")
 
-[node name="SpringArm3D" type="SpringArm3D" parent="PlayerRoot/CharacterBody3D/Head"]
-shape = SubResource("SphereShape3D_l8pkm")
-spring_length = 10.0
+[node name="Prototype Arena" type="Node3D" parent="Arena"]
 
-[node name="Camera3D" type="Camera3D" parent="PlayerRoot/CharacterBody3D/Head/SpringArm3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+[node name="Wall" type="CSGBox3D" parent="Arena/Prototype Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.5, 5.5, -3)
+use_collision = true
+size = Vector3(1, 12, 50)
+material = SubResource("StandardMaterial3D_non4e")
+
+[node name="Wall3" type="CSGBox3D" parent="Arena/Prototype Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 5.5, -3)
+use_collision = true
+size = Vector3(1, 12, 50)
+material = SubResource("StandardMaterial3D_non4e")
+
+[node name="Wall4" type="CSGBox3D" parent="Arena/Prototype Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 5.5, 22.5)
+use_collision = true
+size = Vector3(50, 12, 1)
+material = SubResource("StandardMaterial3D_non4e")
+
+[node name="Wall2" type="CSGBox3D" parent="Arena/Prototype Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 5.5, -28.5)
+use_collision = true
+size = Vector3(50, 12, 1)
+material = SubResource("StandardMaterial3D_non4e")
+
+[node name="Doorway" type="CSGBox3D" parent="Arena/Prototype Arena/Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -4, 0)
+operation = 2
+size = Vector3(3, 4, 2)
+
+[node name="Test Gauntlet" type="Node3D" parent="Arena"]
+
+[node name="SectionCollider" parent="Arena/Test Gauntlet" instance=ExtResource("6_0mnth")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -43)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Arena/Test Gauntlet"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2, -48)
+size = Vector3(1, 3, 3)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Arena/Test Gauntlet"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2, -48)
+size = Vector3(1, 3, 3)
+
+[node name="Barriers" type="Node3D" parent="."]
+
+[node name="SM_Prop_Barrier_012" parent="Barriers" instance=ExtResource("4_bj6kq")]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -3, 0.5, -9)
+
+[node name="SM_Prop_Barrier_013" parent="Barriers" instance=ExtResource("4_bj6kq")]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 8, 0.5, -9)
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("7_0mnth")
+cell_size = Vector3(1, 1, 1)

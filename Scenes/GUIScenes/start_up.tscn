@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://xctif0xor21w"]
+[gd_scene load_steps=3 format=3 uid="uid://xctif0xor21w"]
 
 [ext_resource type="Script" uid="uid://nevfavqyn42n" path="res://scripts/start_up.gd" id="1_d8cqr"]
+[ext_resource type="VideoStream" uid="uid://7xmfyfe6y5ma" path="res://videos/Photonable_Splash_Screen_Video.ogv" id="2_t6etf"]
 
 [node name="StartUp" type="Control"]
 layout_mode = 3
@@ -18,6 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+stream = ExtResource("2_t6etf")
 autoplay = true
 expand = true
 buffering_msec = 1000

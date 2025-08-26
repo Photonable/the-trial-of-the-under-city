@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dugigndm6dcvi"]
+
+[ext_resource type="Texture2D" uid="uid://67pegwbhye6n" path="res://addons/kenney_prototype_textures/dark/texture_03.png" id="1_c4ein"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ked0x"]
+albedo_texture = ExtResource("1_c4ein")
+uv1_scale = Vector3(2, 2, 2)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_f5504"]
+material = SubResource("StandardMaterial3D_ked0x")
+subdivide_width = 3
+subdivide_height = 3
+subdivide_depth = 3
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eg7rg"]
+
+[node name="Tiles" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_f5504")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_eg7rg")

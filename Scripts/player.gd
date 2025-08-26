@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 
-const SPEED : float = 5.0
+const SPEED : float = 10.0
 const JUMP_VELOCITY : float = 4.5
 const LOOK_SPEED : float = 0.002
 
@@ -27,7 +27,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		release_mouse()
 		
 	if mouse_captured and event is InputEventMouseMotion:
-		print("mouse moved")
 		rotate_look(event.relative)
 
 func _physics_process(delta: float) -> void:
@@ -48,9 +47,8 @@ func _physics_process(delta: float) -> void:
 		velocity.z = direction.z * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-	
-
+		velocity.z = move_toward(velocity.z, 0, SPEED)	
+		
 	move_and_slide()
 	
 func rotate_look(rot_input : Vector2):

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2vc75fwe33sa"]
+
+[ext_resource type="Script" uid="uid://bwxwolddtisik" path="res://scripts/section_collider.gd" id="1_lfu6w"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bd6hn"]
+size = Vector3(10, 5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lfu6w"]
+transparency = 1
+albedo_color = Color(1, 0.117647, 1, 0.596078)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lfu6w"]
+material = SubResource("StandardMaterial3D_lfu6w")
+size = Vector3(10, 5, 1)
+
+[node name="SectionCollider" type="Node3D"]
+script = ExtResource("1_lfu6w")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_bd6hn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
+layers = 0
+mesh = SubResource("BoxMesh_lfu6w")
+
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
