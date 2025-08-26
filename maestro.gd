@@ -1,8 +1,8 @@
 extends Node
 
+var debugEna : bool = false
 var game_controller : GameController
 var showrunner_ai : ShowRunner
-var debugEna : bool = false
 
 signal game_started
 signal quit_game
